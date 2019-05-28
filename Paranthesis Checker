@@ -1,0 +1,58 @@
+		
+
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) throws IOException {
+		//code
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int ntc= Integer.parseInt(br.readLine());
+		
+		while(ntc > 0)
+		{
+		    String input=br.readLine();
+		    int flag=0;
+		    Stack<Character> s= new Stack<Character>();
+		    for(int i=0;i<input.length();i++)
+		    {
+		        if(input.charAt(i)=='('||input.charAt(i)=='{'||input.charAt(i)=='[')
+		        {
+		            s.push(input.charAt(i));
+		            continue;
+		        }
+		        char c;
+		        if(input.charAt(i)==')'||input.charAt(i)=='}'||input.charAt(i)==']')
+		        {
+		        try{
+		              c= s.peek();
+		           }
+		           catch(EmptyStackException e)
+		           {
+		               flag=1;
+		               break;
+		           }
+		        if((c == '(' && input.charAt(i)==')')||(c == '{' && input.charAt(i)=='}')||(c == '[' && input.charAt(i)==']'))
+		        {
+		          c= s.pop();
+		        }
+		        else
+		          flag=1;
+		        }
+		        
+		    }
+		       if(flag==1||!(s.empty()))
+		        {
+		            System.out.println("not balanced");
+		        }
+		        else
+		         System.out.println("balanced");
+		    ntc--;
+		}
+		
+		
+	}
+}
