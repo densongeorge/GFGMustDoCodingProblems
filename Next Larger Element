@@ -1,66 +1,57 @@
-/*package whatever //do not write package name here */
-
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-
-class GFG {
-	public static void main (String[] args) throws IOException {
+class GFG
+ {
+public static void main (String[] args) throws IOException {
 		//code
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int ntc= Integer.parseInt(br.readLine());
-		
-		while(ntc > 0)
-{
+		PrintWriter writer = new PrintWriter(System.out);
+		while(ntc > 0){
         int n=Integer.parseInt(br.readLine());
         String line =br.readLine();
-        System.out.println(line);
         String lineArr[] =line.split(" ");
-        int elements[] = new int[lineArr.length];
+        long elements[] = new long[lineArr.length];
+        long res[] = new long[n];
+        Arrays.fill(res,-1);
         int k=0;
-        for(String e:lineArr)
-        {
-            elements[k]=Integer.parseInt(e.trim());
+        for(String e:lineArr){
+            elements[k]=Long.parseLong(e.trim());
             k++;
         }
-        int flag=0;
-		LinkedHashMap<Integer,Integer> e=new LinkedHashMap<Integer,Integer>();
+	//Stack will hold the indices of the pushed elements
         Stack<Integer> s= new Stack<Integer>();
-        
-        //main logic for the program
-        
-        //initialize the map
-		for(int i=0;i<elements.length;i++)
-		{
-		    e.put(elements[i],-1);
+        s.push(0); // push the first index in the stack
+        for(int i=1;i<elements.length;i++){
+            long num=elements[s.peek()];
+            while(elements[i]>num){
+               res[s.peek()]=elements[i];
+               s.pop();
+               if(s.empty())
+               {
+                   break;
+               }
+               else
+               {
+                   num=elements[s.peek()];
+               }
+               
+            }
+            if(i<elements.length-1)
+                s.push(i);
+            
+        }
+          
+         for(int i=0;i<elements.length;i++)
+        {
+            writer.print(res[i]+" ");
+        }
+        writer.println();
+        writer.flush();
+       
+        ntc--;
 		}
-		
-		s.push(elements[0]); // push the first element in the stack
-		
-		for(int i=1;i<elements.length;i++)
-		{
-		    int num=s.peek();
-		    while(elements[i]>num && e.get(num) == -1)
-		    {
-		        e.put(num,elements[i]);
-		        s.pop();
-		        if(!s.empty())
-		        num=s.peek();
-		        else
-		        break;
-		        
-		    }
-		    if(i<elements.length-1)
-		    s.push(elements[i]);
-		}
-		
-		for(Integer i: e.values()){
-		    System.out.print(i);
-		    System.out.print(" ");
-		}
-		System.out.println();
-		
-		    ntc--;
+		 writer.close();
 }
-	}
 }
