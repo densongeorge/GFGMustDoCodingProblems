@@ -1,0 +1,51 @@
+
+//Modified level order traversal.
+// push a pair(Node,height) into the queue, when a particular height is encountered for the first time, checked using a map, print it out.
+class GfG
+{
+    
+    class Element{
+        Node n;
+        int height;
+    }
+    void leftView(Node root)
+    {
+        Queue<Element> q = new LinkedList<Element>();
+        Map<Integer,Integer> m = new HashMap<Integer,Integer>();
+      // Your code here
+          Element e = new Element();
+          e.n=root;
+          e.height=1;
+          q.add(e);
+          m.put(e.height,e.n.data);
+          System.out.print(e.n.data+" ");
+          while(!q.isEmpty())
+          {
+               e = q.remove();
+              root=e.n;
+              int h=e.height;
+              if(!m.containsKey(h))
+              {
+                   m.put(e.height,e.n.data);
+                   System.out.print(e.n.data+" ");
+              }
+          if(root.left != null)
+          {
+          e = new Element();
+          e.n=root.left;
+          e.height=h+1;
+          q.add(e);
+         
+              }
+          
+          if(root.right != null)
+          {
+           e = new Element();
+          e.n=root.right;
+          e.height=h+1;
+          q.add(e);
+          
+          }
+    }
+          }
+      }
