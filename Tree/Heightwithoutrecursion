@@ -1,0 +1,33 @@
+class GfG
+{
+    int height(Node node) 
+    {
+         // Your code here
+         Queue<Node> q = new LinkedList<Node>();
+         q.add(node);
+        int h=0;
+         while(!q.isEmpty())
+         {
+             int s=q.size();
+ //this loop systematically removes one level and at the same time adds the child nodes, once a level is removed , height is incremented.
+             while(s>0)
+             {
+                 Node n = q.remove();
+                 
+                 if(n.left != null)
+                 {
+                    q.add(n.left); 
+                 }
+                 if(n.right != null)
+                 {
+                    q.add(n.right); 
+                 }
+                 
+                 s--;
+             }
+             h++;
+         }
+         
+       return h;  
+    }   
+}
