@@ -1,0 +1,55 @@
+class GfG
+{
+    //uses auxillary min stack space.
+    Stack<Integer> s= new Stack<Integer>();
+    Stack<Integer> min = new Stack<Integer>();
+    /*returns min element from stack*/
+    int getMin()
+    {
+        int e=9999;
+	// Your code here
+	if(!min.empty())
+	{
+	    e=min.peek();
+	}
+	else
+	{
+	    e=-1;
+	}
+	    return e;
+    }
+    
+    /*returns poped element from stack*/
+    int pop()
+    {
+	// Your code here
+	int e=9999;
+	if(!s.empty())
+	 e= s.pop();
+	 else
+	 return -1;
+	
+    if(!min.empty())
+    {
+	if(e == min.peek())
+	{
+	    min.pop();
+	}
+    }
+	return e;
+
+    }
+    /*push element x into the stack*/
+    void push(int x)
+    {
+	// Your code here
+	s.push(x);
+	if(min.empty())
+	min.push(x);
+	else{
+	    if(x<=min.peek()){
+	        min.push(x);
+	    }
+	}
+    }	
+}
