@@ -1,0 +1,110 @@
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 
+	 int ntc= Integer.parseInt(br.readLine());
+	 PrintWriter pr = new PrintWriter(System.out);
+	 while(ntc>0){
+	     String inputLine= br.readLine();
+	     
+	     String [] ip = inputLine.split(" ");
+	     
+	     int [] narrays = new int[ip.length];
+	     int k=0;
+	     for(String i:ip)
+    	  {
+    	   narrays[k]= Integer.parseInt(i);
+    	   k++;
+    	  }
+	     LinkedHashMap<Long,Integer> hs = new LinkedHashMap<Long,Integer>();
+	         inputLine= br.readLine();
+	         String [] a = inputLine.split(" ");
+	         inputLine= br.readLine();
+	         String []b = inputLine.split(" ");
+	         inputLine= br.readLine();
+	         String []c = inputLine.split(" "); 
+    	     long [] elements1 = new long[ a.length ];
+    	     long [] elements2 = new long[ b.length ];
+    	     long [] elements3 = new long[ c.length ];
+    	     k=0;
+    	     for(String il:a)
+    	     {
+    	         elements1[k]= Long.parseLong(il);
+    	         k++;
+    	     }
+    	     k=0;
+    	     for(String il:b)
+    	     {
+    	         elements2[k]= Long.parseLong(il);
+    	         k++;
+    	     }
+    	     k=0;
+    	     for(String il:c)
+    	     {
+    	         elements3[k]= Long.parseLong(il);
+    	         k++;
+    	     }
+    	    
+    	     for(int j=0 ; j < elements1.length; j++)
+        	             hs.put(elements1[j],1);
+    	       for(int j=0 ; j < elements2.length; j++)
+    	     {
+    	         if(hs.containsKey(elements2[j]))
+    	         {
+    	             //contains from another array
+    	             k=hs.get(elements2[j]);
+    	             k++;
+    	             if(k==2)
+    	             hs.put(elements2[j],k);
+    	             else
+    	             continue;
+    	         }
+    	       
+    	     }
+    	    
+    	       for(int j=0 ; j < elements3.length; j++)
+    	     {
+    	         if(hs.containsKey(elements3[j]))
+    	         {
+    	             //contains from another array
+    	             k=hs.get(elements3[j]);
+    	             k++;
+    	             if(k==3)
+    	             hs.put(elements3[j],k);
+    	             else
+    	             continue;
+    	         }
+    	    
+    	     }
+	     
+	    
+	       int noop=0;
+	      
+	     for(Map.Entry me : hs.entrySet()){
+	         long key = (long) me.getKey();
+	         int value = (int) me.getValue();
+	       
+	         if(value == 3)
+	         {
+	             noop=1;
+	             pr.print(key + " ");
+	         }
+	     }
+	     //System.out.println(hs);
+	     if(noop==0)
+	     pr.print(-1);
+	     pr.println();
+	     pr.flush();
+	     
+	     
+	     
+	     ntc--;
+	 }
+	 pr.close();
+	 }
+}

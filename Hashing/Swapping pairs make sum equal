@@ -1,0 +1,76 @@
+import java.util.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 
+	 int ntc= Integer.parseInt(br.readLine());
+	 PrintWriter pr = new PrintWriter(System.out);
+	 while(ntc>0){
+	     String inputLine= br.readLine();
+	     
+	     String [] ip = inputLine.split(" ");
+	     
+        int [] narrays = new int[ip.length];
+            int k=0;
+	     for(String i:ip)
+    	  {
+    	   narrays[k]= Integer.parseInt(i);
+    	   k++;
+          }
+           inputLine= br.readLine();
+	        String [] a = inputLine.split(" ");
+	        inputLine= br.readLine();
+	        String [] b = inputLine.split(" ");
+            long [] elements1 = new long[ a.length ];
+            long [] elements2 = new long[ b.length ];
+             k=0;
+             long sum1=0;
+             long sum2=0;
+    	     for(String il:a)
+    	     {
+    	         elements1[k]= Long.parseLong(il);
+    	         sum1+=elements1[k];
+    	         k++;
+    	     }
+    	     k=0;
+    	     for(String il:b)
+    	     {
+    	         elements2[k]= Long.parseLong(il);
+    	         sum2+=elements2[k];
+    	         k++;
+             }
+             /*sum1-a+b=sum2-b+a
+             a-b = sum1 - sum2 / 2
+             a = d+b
+             */
+             long d = (sum1-sum2)/2;
+             // set is only used to remove dups in the elements if any
+             HashMap <Long,Integer> t = new HashMap<Long,Integer>();
+          
+        
+             for(long i:elements1)
+             {
+                 t.put(i,1);
+             }
+             int flag=-1;
+             for(long i:elements2)
+             {
+                
+                 long temp=i+d;
+                 if(t.containsKey(temp))
+                 {
+                 flag=1;
+                 break;
+                 }
+             }
+             System.out.println(flag);
+             
+             
+            ntc--;
+	 }
+	 }
+ }

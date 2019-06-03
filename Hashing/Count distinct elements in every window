@@ -1,0 +1,40 @@
+class GfG
+{
+    void countDistinct(int A[], int k, int n)
+    {
+        int limit=k;
+        int nwinstart=0;
+        LinkedHashMap<Integer,Integer> h = new LinkedHashMap<Integer,Integer>();
+         for(int i=0;i<n;i++)
+         {
+             if(limit>=1)
+             {
+                 if(h.containsKey(A[i]))
+                 {
+                    int v=h.get(A[i]);
+                    v++;
+                    h.put(A[i],v);
+                 }
+                 else{
+                h.put(A[i],1);
+               
+                 }
+                  limit--;
+             }
+             if(limit==0)
+             {
+                System.out.print(h.size()+" ");
+                limit=1;
+                int v = h.get(A[nwinstart]);
+                if(v==1)
+                    h.remove(A[nwinstart]);
+                else
+                {
+                    v--;
+                    h.put(A[nwinstart],v);
+                }
+                nwinstart++;
+             }
+         }
+    }
+}
