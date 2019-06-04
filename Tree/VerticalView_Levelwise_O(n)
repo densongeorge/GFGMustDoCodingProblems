@@ -1,0 +1,63 @@
+class Pair<T,V>{
+        T n;
+        V hd;
+    }
+class GFG
+{
+    
+    static void verticalOrder(Node root)
+    {
+        // add your code
+        //System.out.print(root.right.data);
+        //System.out.print(root.left.data);
+        Map<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
+        Queue<Pair<Node,Integer>>q = new LinkedList<Pair<Node,Integer>>();
+        
+        Pair<Node,Integer> p = new Pair<Node,Integer>();
+        p.n=root;
+        p.hd=0;
+        q.add(p);
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        while(!q.isEmpty())
+        {
+            p = q.remove();
+            //System.out.print("Queue data = "+ e.n.data);
+            int v=p.hd;
+            min=v<min?v:min;
+            max=v>max?v:max;
+            if(m.containsKey(v))
+            {
+                m.get(v).add(p.n.data);
+            }
+            else
+            {
+             m.put(v,new ArrayList<Integer>());
+             m.get(v).add(p.n.data);
+            }
+            if(p.n.left != null)
+            {
+           Pair<Node,Integer> e = new Pair<Node,Integer>();
+           e.n=p.n.left;
+           e.hd=v-1;
+           q.add(e);
+             }
+            if(p.n.right != null)
+            {
+            Pair<Node,Integer> e = new Pair<Node,Integer>();
+            e.n=p.n.right;
+            e.hd=v+1;
+            q.add(e);
+            }
+        }
+        
+         for(int i=min;i<=max;i++)
+            {
+                ArrayList<Integer> al=m.get(i);
+                for(Integer k:al)
+                {
+                    System.out.print(k+" ");
+                }
+            }
+    }
+}
