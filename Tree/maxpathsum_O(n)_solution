@@ -1,0 +1,47 @@
+class Pair{
+    Integer pathsum;
+    Integer maxsum;
+}
+class GfG
+{
+    
+    public static int maxPathSum(Node root)
+    {
+        // your code here
+        if(root==null)
+        return 0;
+        Pair e=maxPathSumHelper(root);
+        return e.maxsum;
+    }
+    
+    public static Pair maxPathSumHelper(Node root){
+        if(root==null)
+        {
+        Pair e=new Pair();
+        e.pathsum=0;
+        e.maxsum=0;
+        return e;
+        }
+        Pair l=maxPathSumHelper(root.left);//similar to diameter left
+        Pair r=maxPathSumHelper(root.right);//similar to diameter right
+        int lsum=l.pathsum;
+        int rsum=r.pathsum;
+        int pathsum=root.data+Math.max(lsum,rsum);
+        int option2=l.maxsum;
+        int option3=r.maxsum;
+        int option1=0;
+        if(root.left != null && root.right != null)//if both children are present
+         //testcase:
+         //1
+         //5
+         //-31 8 L -31 -20 R 8 4 L 4 2 L 4 1 R
+        option1=root.data+lsum+rsum;
+        int maxsum=Math.max(option1,Math.max(option2,option3));
+        Pair e=new Pair();
+        e.pathsum=pathsum;
+        e.maxsum=maxsum;
+        return e;
+        
+    }
+ 
+}
