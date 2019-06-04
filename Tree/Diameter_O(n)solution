@@ -1,0 +1,40 @@
+class Pair<T,V>{
+    T height;
+    V diameter;
+}
+class GfG
+{
+   /* Complete the function to get diameter of a binary tree */
+    int diameter(Node node)
+    {
+        // Your code here
+        if(node==null)
+        return 0;
+        Pair<Integer,Integer>p=diameterHelper(node);
+        return p.diameter;
+        
+        
+    }
+    
+   Pair<Integer,Integer> diameterHelper(Node node){
+       if(node==null)
+       {
+           Pair<Integer,Integer> e=new Pair<Integer,Integer>();
+           e.height=0;
+           e.diameter=0;
+            return e;
+       }
+        Pair<Integer,Integer> l=diameterHelper(node.left);
+        Pair<Integer,Integer> r=diameterHelper(node.right);
+        int height=1+Math.max(l.height,r.height);
+        int option1=l.height+r.height;
+        int option2=l.diameter;
+        int option3=r.diameter;
+        int diameter=1+Math.max(option1,Math.max(option2,option3));
+        Pair<Integer,Integer> e=new Pair<Integer,Integer>();
+           e.height=height;
+           e.diameter=diameter;
+            return e;
+    }
+
+}
