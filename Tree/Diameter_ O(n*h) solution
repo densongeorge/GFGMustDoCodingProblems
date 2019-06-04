@@ -1,0 +1,24 @@
+class GfG
+{
+   /* Complete the function to get diameter of a binary tree */
+    int diameter(Node node)
+    {
+        // Your code here
+        if(node==null)
+        return 0;
+        int option1=height(node.left)+height(node.right);
+        int option2=diameter(node.left);
+        int option3=diameter(node.right);
+        return 1+Math.max(option1,Math.max(option2,option3));
+        
+    }
+    
+    int height(Node node){
+        if(node==null)
+            return 0;
+        int l=height(node.left);
+        int r=height(node.right);
+        int h=l>r?l:r;
+        return h+1;
+    }
+}
