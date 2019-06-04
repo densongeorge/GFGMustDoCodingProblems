@@ -30,6 +30,8 @@ class GfG
         int option2=l.maxsum;
         int option3=r.maxsum;
         int option1=0;
+        // this condition is not required in diameter as the number added in that case "1" is always positive
+        // but here data values in the nodes can be negative too. so max can be deceived.
         if(root.left != null && root.right != null)//if both children are present
          //testcase:
          //1
