@@ -1,0 +1,29 @@
+class GfG
+{   
+    Node LCA(Node node, int n1, int n2) 
+    {
+        // Your code here
+       if(node==null)
+       return node;
+       while(node!=null)
+       {
+       if(node.data < n1 && node.data < n2 )
+       {
+          node=node.right;
+       }
+       else if(node.data > n1 && node.data > n2 )
+       {
+          node=node.left;
+       }
+       else{
+           break;
+       }
+       
+       }
+   
+     return node;
+    }
+    
+    
+    
+}
