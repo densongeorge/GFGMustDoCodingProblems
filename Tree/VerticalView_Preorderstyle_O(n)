@@ -1,0 +1,55 @@
+/*
+1
+4
+1 2 L 1 3 R 2 4 R 4 5 R
+level wise answer : 2 1 4 3 5
+pre order answer : 2 1 4 5 3
+
+*/
+
+class GFG
+{
+      Map<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
+       int min=Integer.MAX_VALUE;
+       int max=Integer.MIN_VALUE;
+     void verticalOrder(Node root)
+    {
+     preOrder(root,0);
+         for(int i=min;i<=max;i++)
+            {
+                ArrayList<Integer> al=m.get(i);
+                for(Integer k:al)
+                {
+                    System.out.print(k+" ");
+                }
+            }
+    }
+    
+     void preOrder(Node root,int hd)
+    {
+       
+      if(root!=null)
+      {
+          if(m.containsKey(hd))
+          {
+            ArrayList<Integer> al=m.get(hd);
+            al.add(root.data);
+            m.put(hd,al);
+          }
+          else
+          {
+              min=min<hd?min:hd;
+              max=max>hd?max:hd;
+            ArrayList<Integer> a = new ArrayList<Integer>();
+            a.add(root.data);
+            m.put(hd,a);
+            
+          }
+          preOrder(root.left,hd-1);
+            preOrder(root.right,hd+1);
+      
+    
+      
+    }
+}
+}
