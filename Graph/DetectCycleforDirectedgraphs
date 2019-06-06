@@ -1,0 +1,47 @@
+/*Complete the function below*/
+/*
+ArrayList<ArrayList<Integer>> list: to represent graph containing 'v'
+                                    vertices and edges between them
+V: represent number of vertices
+*/
+class DetectCycle
+{
+    static boolean isCyclic(ArrayList<ArrayList<Integer>> list, int V)
+    {
+        // add your code here
+        boolean [] visited = new boolean[V];
+        boolean [] explored = new boolean[V];
+        
+        for(int i=0;i<V;i++)
+        {
+            if(!visited[i])
+            {
+            if(DFS(i,list,visited,explored)==true)
+            return true;
+            }
+        }
+        return false;
+    }
+    
+    static boolean DFS(int src,ArrayList<ArrayList<Integer>> list,boolean[] visited,boolean[] explored)
+    {
+        visited[src]=true;
+        ArrayList<Integer> al = list.get(src);
+        for(Integer i: al )
+        {
+             if(!visited[i])
+            {
+                if(DFS(i,list,visited,explored))
+                return true;
+            }
+            else if(!explored[i])
+            {
+               return true;
+            }
+            
+           
+        }
+        explored[src]=true;
+        return false;
+    }
+}
