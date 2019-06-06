@@ -1,0 +1,21 @@
+class Traversal
+{
+    static void dfs(int src, ArrayList<ArrayList<Integer>> list, boolean visited[])
+    {
+       // add your code here
+                System.out.print(src+" ");   
+                visited[src]=true;
+                
+                ArrayList<Integer> al= list.get(src);
+                for(int i=0;i<al.size();i++)
+                {
+                int e=al.get(i);
+                if(visited[e]==false)
+                    {
+                      dfs(e,list,visited);
+                    }
+                }
+                
+    }
+       
+    }
