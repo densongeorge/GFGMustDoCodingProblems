@@ -1,0 +1,36 @@
+class TopologicalSort
+{
+    int stacktop;
+     int[] topoSort(ArrayList<ArrayList<Integer>> list, int N)
+    {
+       // add your code here
+       boolean [] visited=new boolean[N];
+       stacktop=N-1;
+       int [] result = new int[N];
+       for(int i=0;i<N;i++)
+       {
+           if(!visited[i])
+           {
+               DFS(i,list,visited,result);
+           }
+       }
+       return result;
+    }
+    
+    void DFS(int src,ArrayList<ArrayList<Integer>> list,boolean [] visited,int[]result)
+    {
+        visited[src]=true;
+        ArrayList<Integer> al = list.get(src);
+        for(Integer i:al)
+        {
+            if(!visited[i])
+            {
+                DFS(i,list,visited,result);
+            }
+        }
+        result[stacktop--]=src;
+        
+    }
+    
+    
+}
