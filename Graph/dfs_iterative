@@ -1,0 +1,28 @@
+  void dfs(int src, ArrayList<ArrayList<Integer>> list, boolean visited[])
+    {
+       // add your code here
+       Stack<Integer> s = new Stack<Integer>();
+       
+       
+       s.push(src);
+       while(!s.empty())
+       {
+         int e=s.peek();
+         s.pop();
+         //checking for duplicate elements in the stack.
+         if(visited[e]==false)
+         {
+         System.out.print(e+" ");  
+         visited[e]=true;
+         }      
+         ArrayList<Integer> al= list.get(e);
+         for(int i=0;i<al.size();i++)
+                {
+                int m=al.get(i);
+                if(visited[m]==false)
+                    {
+                      s.push(m);
+                    }
+                }
+       }        
+    }
