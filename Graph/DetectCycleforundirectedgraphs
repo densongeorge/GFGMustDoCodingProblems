@@ -1,0 +1,53 @@
+//keep booleans as much as possible or it will lead to TLE
+class DetectCycle
+{
+    static boolean isCyclic(ArrayList<ArrayList<Integer>> list, int V)
+    {
+       // add your code here
+       boolean[] visited=new boolean[V];
+       for(int i=0;i<V;i++)
+       {
+           if(!visited[i])
+           {
+       if (DFS(i,-1,visited,list) )
+        return true;
+       }
+       }
+       return false;
+       
+    }
+    
+    static boolean DFS(int src,int parent,boolean[] visited,ArrayList<ArrayList<Integer>> list)
+    {
+       
+        visited[src]=true;
+        ArrayList<Integer> al=list.get(src);
+        for(Integer e : al)
+        {
+            
+            //int e=al.get(i);
+            //check self loops
+            if(src==e)
+            {
+                return true;
+            }
+            if(visited[e]==false)
+            {
+             
+               if( DFS(e,src,visited,list))
+               {
+                   return true;
+               }
+            }
+            //visited and not parent check
+            else if(visited[e]==true && e != parent)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+        
+        
+    }
+}
