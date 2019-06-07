@@ -1,0 +1,26 @@
+class GfG
+{
+    void deleteNode(Node node)
+    {
+         // Your code here
+         Node p=node;
+         Node q=node.next;
+         //r is used to keep a track of the previous node so that the last node is freed
+         //this is needed as eventhough p holds the node to be "freed"
+         //java doesnt have free node as an option.
+         //O(n) solution
+         Node r=node;
+         if(q==null)
+            return;
+         while(q!=null){
+            int temp=p.data;
+            p.data=q.data;
+            q.data=temp;
+            r=p;
+            p=p.next;
+            q=q.next;
+         }
+         r.next=null;
+         
+    }
+}
