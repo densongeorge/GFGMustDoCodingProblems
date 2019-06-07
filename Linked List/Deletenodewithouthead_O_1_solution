@@ -1,0 +1,17 @@
+class GfG
+{
+    void deleteNode(Node node)
+    {
+         // Your code here
+//will not work for the last node. This will not be possible in java
+         Node p=node;
+         Node q=node.next;
+         //O(1) solution
+         if(q==null)
+            return;
+         p.data=q.data;
+         p.next=q.next;
+         
+    }
+}
+
