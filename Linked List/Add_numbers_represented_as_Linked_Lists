@@ -1,0 +1,49 @@
+class Add {
+    
+    // This function will add the numbers represented by two linked lists
+    Node addTwoLists(Node first, Node second) {
+        // Your code here
+        Node newHead=new Node(0);
+        Node res=newHead;
+        Node p=first;
+        Node q=second;
+        int sum=0;
+        int carry=0;
+        boolean flag=true;
+        while(first!=null || second!=null){
+            sum=((first!=null)?first.data:0)+((second!=null)?second.data:0)+carry;
+            if(sum>9){
+                sum=sum%10;
+                carry=1;
+            }
+            else{
+                carry=0;
+            }
+           if(flag==true){
+               res.data=sum;
+               res.next=null;
+               flag=false;
+           }
+           else{
+               res.next=new Node(sum);
+               res=res.next;
+               res.next=null;
+           }
+           if(first!=null)
+           first=first.next;
+           if(second!=null)
+           second=second.next;
+           
+        }
+        //carry is always added in the next time
+       if(carry>0)
+       {
+           Node t=new Node(carry);
+           res.next=t;
+           t.next=null;
+       }
+   
+        
+     return newHead;   
+    }
+}
