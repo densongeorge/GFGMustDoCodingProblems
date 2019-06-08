@@ -1,0 +1,54 @@
+class SCC
+{
+    int sccCount;
+    int id;
+    public int kosaraju(ArrayList<ArrayList<Integer>> list, int N){
+        // your code here
+        sccCount=0;
+        id=0;
+        boolean[] visited = new boolean[N+1];
+        boolean[] onStack = new boolean[N+1];
+        int[] ids = new int[N+1];
+        int[] lowlink = new int[N+1];
+        Stack<Integer> s = new Stack<Integer>();
+        int k=list.size();
+        for(int i=0;i<k;i++){
+            if(!visited[i])
+            DFS(i,visited,onStack,ids,lowlink,s,list);
+        
+        }
+        
+        return sccCount-1; 
+    }
+    void DFS(int src,boolean[] visited,boolean[] onStack,int[] ids,int[] lowlink,Stack<Integer> s,ArrayList<ArrayList<Integer>> list){
+        visited[src]=true;
+        s.push(src);
+        onStack[src]=true;
+        ids[src]=id;
+        lowlink[src]=id;
+        id++;
+        ArrayList<Integer> al = list.get(src);
+        
+        for(Integer i:al)
+        {
+            if(!visited[i])
+            DFS(i,visited,onStack,ids,lowlink,s,list);
+            if(onStack[i]) 
+            lowlink[src]=Math.min(lowlink[i],lowlink[src]);
+        }
+        //SCC detected
+        if(ids[src]==lowlink[src]){
+            //we pop elements from the stack corresponding to the current SCC only.
+            //once the lowest node is found we break out from the loop.
+        while(true){
+        int n=s.pop();
+        onStack[n]=false;
+        lowlink[n]=ids[src];
+        if(n==src)
+        break;
+        }
+        sccCount++;
+        }
+        
+    }
+}
