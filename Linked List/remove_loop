@@ -1,0 +1,36 @@
+class Loop{
+    
+    // This function will remove the loop from the linked list
+    public static void removeTheLoop(Node head)
+    {
+        //Your code here
+        
+        if(head==null)
+        return;
+        
+        else{
+            Node fp=head;
+            Node sp=head;
+            boolean loop=false;
+            while(fp!=null&&fp.next!=null){
+                fp=fp.next.next;
+                sp=sp.next;
+                if(sp==fp){
+                    loop=true;
+                    break;
+                }
+            }
+            //distance from head=distance of meetup
+            if(loop==true)
+            {
+                sp=head;
+                Node fpbehind=fp;
+                while(sp!=fp){
+                    sp=sp.next;
+                    fpbehind=fp;
+                    fp=fp.next;
+                }
+                fpbehind.next=null;
+            }
+        }
+    
