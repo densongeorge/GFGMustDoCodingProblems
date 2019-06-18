@@ -1,0 +1,60 @@
+/* Node of a linked list
+ class Node {
+   int data;
+    Node next;
+    Node(int d)  { data = d;  next = null; }
+}
+ Linked List class
+class LinkedList
+{
+    Node head;  // head of list
+}
+This is method only submission.  You only need to complete the method. */
+class Intersect
+{
+	int intersectPoint(Node headA, Node headB)
+	{
+         // code here
+         Node p = headA;
+         Node q = headB;
+         int countA = 0;
+         int countB = 0;
+         while(p != null){
+             countA = countA + 1;
+             p=p.next;
+         }
+         while(q != null){
+             countB = countB + 1;
+             q=q.next;
+         }
+         int diff=0;
+        int i=1;
+         if(countA > countB){
+              p = headA;
+              q = headB;
+             diff = countA - countB;
+             while(p != null && i < (diff)){
+                 p=p.next;
+                 i++;
+             }
+             while(p.data != q.data){
+                 p=p.next;
+                 q=q.next;
+             }
+             
+         } else{
+              p = headB;
+              q = headA;
+             diff = countB - countA;
+             while(p != null && i < (diff)){
+                 p=p.next;
+                 i++;
+             }
+              while(p.data != q.data){
+                 p=p.next;
+                 q=q.next;
+             }
+         }
+         return p.data;
+	}
+}
