@@ -1,0 +1,43 @@
+//User function Template for Java
+/*
+class Node
+{
+    int data;
+    Node next;
+    Node(int data)
+    {
+        this.data = data;
+        next = null;
+    }
+}
+*/
+class LinkedList
+{
+    static Node segregate(Node head)
+    {
+        // add your code here
+        
+        int [] a = new int [3];
+        Arrays.fill(a,0);
+        Node p = head;
+        while(p != null){
+            a[p.data]++;
+            p = p.next;
+        }
+        p = head;
+        int i=0;
+        while(p != null){
+            if(a[i]>0) { 
+                p.data = i;
+                p=p.next;
+                a[i]--;
+                continue;
+            }
+            
+            i++;
+           
+        }
+        
+        return head;
+    }
+}
