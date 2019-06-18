@@ -1,0 +1,59 @@
+/*
+// A Binary Tree node
+class Node
+{
+    int data;
+    Node left, right;
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+class Spiral
+{
+      void printSpiral(Node node) 
+      {
+           // Your code here
+            Queue<Node> q = new LinkedList<Node>();
+         q.add(node);
+        int h=0;
+        StringBuffer res = new StringBuffer();
+         while(!q.isEmpty())
+         {
+             int s=q.size();
+ //this loop systematically removes one level and at the same time adds the child nodes, once a level is removed , height is incremented.
+        ArrayList<String> sb = new ArrayList<String>();
+             while(s>0)
+             {
+                 Node n = q.remove();
+                 
+                 if(n.left != null)
+                 {
+                    q.add(n.left); 
+                 }
+                 if(n.right != null)
+                 {
+                    q.add(n.right); 
+                 }
+                 if(s==1)
+                 sb.add(n.data+" ");
+                 else
+                 sb.add(n.data+" ");
+                 s--;
+             }
+             if(h%2==0) {
+                 Collections.reverse(sb);
+             }
+             //System.out.print(sb+" ");
+             //System.out.print(h);
+             for(String i : sb )
+                res.append(i);
+            //res.append(" ");
+             h++;
+         }
+         
+         System.out.print(res.toString().trim());
+      }
+}
