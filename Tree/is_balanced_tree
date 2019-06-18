@@ -1,0 +1,54 @@
+/* A binary tree node class
+class Node
+{
+	int data;
+	Node left,right;
+	
+	Node(int d)
+	{
+		data = d;
+		left = right = null;		
+	}
+} */
+class Pair{
+    boolean bal;
+    int h;
+    Pair(boolean b,int h1){
+        bal=b;
+        h=h1;
+    }
+}
+class Tree
+{
+   /* Complete the function to get diameter of a binary tree */
+   
+    boolean isBalanced(Node root)
+    {
+        
+        if(root == null)
+          return true;
+          
+          Pair h = isbalancedutil(root);
+            //checking current node                          //checking left subtree  //checking right subtree
+        if(h.bal)
+           return true;
+        
+        return false;
+        
+    }
+    
+    Pair isbalancedutil(Node root){
+        if(root==null){
+            return new Pair(true,0);
+        }
+        Pair l = isbalancedutil(root.left);
+        Pair r = isbalancedutil(root.right);
+        int height = l.h>r.h?l.h:r.h;
+        boolean balanced = (l.bal==false || r.bal==false)?false:true;
+        if(balanced){
+            balanced = Math.abs(l.h-r.h) <2 ? true : false;
+        }
+        
+        return new Pair(balanced,height+1);
+    }
+}
