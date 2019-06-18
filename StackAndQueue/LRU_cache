@@ -1,0 +1,113 @@
+/*You are required to complete below class */
+
+class Node {
+    int data;
+    Node next;
+    Node prev;
+    
+    Node(int d){
+        data = d;
+    }
+}
+
+
+class LRUCache {
+ 
+   Map<Integer,Integer> map;
+    Map<Integer,Node> aux;
+    Node head,tail;
+    int capacity;
+    int length; // length of the DLL
+    /*Inititalize an LRU cache with size N */
+    public LRUCache(int N) {
+       //Your code here
+       capacity = N;
+       length = 0;
+       map = new HashMap<>();
+       aux = new HashMap<>();
+    }
+    
+    /*Returns the value of the key x if 
+     present else returns -1 */
+    public int get(int x) {
+       //Your code here
+       if(map.containsKey(x)) {
+           
+           delete(aux.get(x));
+           aux.remove(x);
+           Node n = new Node(x);
+           addNode(n);
+           aux.put(x,head);
+           
+           return map.get(x);
+       }
+       
+       return -1;
+    }
+    
+    /*Sets the key x with value y in the LRU cache */
+    public void set(int x, int y) {
+       //Your code here
+       if(!map.containsKey(x)) {
+           if(length == capacity) {
+               int evict = tail.data;
+               Node n = tail;
+               delete(n);
+               map.remove(evict);
+               aux.remove(evict);
+           }
+               map.put(x,y);
+               Node n = new Node(x);
+               addNode(n);
+               aux.put(x,head);
+        } else {
+               delete(aux.get(x));
+               aux.remove(x);
+               Node n = new Node(x);
+               addNode(n);
+               aux.put(x,head);
+               map.put(x,y);
+   }
+   
+    }
+    
+    void delete(Node p){
+        length --;
+        //last node or single node case
+        if(p.next == null){
+            if(p.prev != null) {
+                tail = tail.prev;
+                p.prev.next = null;
+                p.prev = null;
+                p = null;
+            } else {
+                head = null;
+                tail = null;
+            }
+            
+        } else if(p.prev == null) {
+            head = head.next;
+            head.prev=null;
+            p=null;
+        } else {
+            p.prev.next = p.next;
+            p.next.prev = p.prev;
+            p = null;
+        }
+        
+    }
+    
+    void addNode(Node p){
+        if(length == 0) {
+            head = p;
+            tail = p;
+        } else {
+           head.prev = p;
+           p.next = head;
+           head = head.prev;
+         }
+         length++;
+    }
+    
+    
+}
