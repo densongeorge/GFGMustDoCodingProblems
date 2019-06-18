@@ -1,0 +1,43 @@
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 int t = Integer.parseInt(br.readLine());
+	 
+	 
+	 while(t-->0){
+	     StringBuffer sb = new StringBuffer();
+	     boolean[] visited = new boolean[26];
+	     boolean[] inqueue = new boolean[26];
+	     int n = Integer.parseInt(br.readLine());
+	     Queue <Character> q = new LinkedList<Character>();
+	     String[] s = br.readLine().split(" ");
+	     for(int i=0; i<n ; i++) {
+	        // System.out.println(s[i].charAt(0)-'a');
+	        // System.exit(1);
+	        if(!visited[(s[i].charAt(0)-'a')]) {
+	            q.add(s[i].charAt(0));
+	            
+	            sb.append(q.peek()+" ");
+	            visited[(s[i].charAt(0)-'a')]=true;
+	            
+	     }
+	     else{
+	         if((!q.isEmpty())&&(q.peek()==s[i].charAt(0))) q.remove();
+	         while(!q.isEmpty() && inqueue[q.peek()-'a']) q.remove();
+	         if(q.isEmpty())
+	            sb.append(-1+" ");
+	         else
+	         sb.append(q.peek()+" ");
+	         inqueue[(s[i].charAt(0)-'a')]=true;
+	     }
+	 }
+	 System.out.println(sb.toString().trim());
+	 }
+}
+
+}
