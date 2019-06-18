@@ -1,0 +1,42 @@
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 
+	 int tc = Integer.parseInt(br.readLine());
+	 
+	 //PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+	 while(tc-- > 0){
+	   int mins = 0;
+	   PriorityQueue<Integer> q = new PriorityQueue<Integer>();
+	   String[] ip = br.readLine().split(" ");
+	   
+	   int k = Integer.parseInt(ip[0]);
+	    int n = Integer.parseInt(ip[1]);
+	    
+	    String[] l = br.readLine().split(" ");
+	    for(int i=0; i<n; i++) {
+	        int a = Integer.parseInt(l[i]);
+	        
+	        if(mins<k) {
+	            q.add(a);
+	            mins++; 
+	        }
+	        else if(a>q.peek()){
+	            q.remove();
+	            q.add(a);
+	        }
+	        
+	        
+	        if(mins < k) System.out.print(-1+" ");
+	        else System.out.print(q.peek()+" ");
+	        
+	    }
+	    System.out.println();
+	 }
+}
+}
