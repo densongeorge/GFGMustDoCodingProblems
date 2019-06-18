@@ -1,0 +1,59 @@
+//User function Template for Java
+class Pair{
+    int row;
+    int col;
+    Pair(int r,int c){
+        row=r;
+        col=c;
+    }
+}
+class Islands
+{
+    
+    // Function to find the number of island in the given list
+    // N, M: size of list row and column respectively
+    int[] consr = {0,0,-1,1};
+    int[] consc = {-1,1,1,0};
+    int findIslands(ArrayList<ArrayList<Integer>> list, int N, int M){
+        // Your code here
+        boolean[][] visited = new boolean[N][M];
+        int nislands = 0;
+        int t=0;
+        for(int i=0; i<N; i++){
+            for(int j=0; j<M; j++){
+                if(visited[i][j] == false && list.get(i).get(j) == 1){
+                   nislands+=DFS(new Pair(i,j), list,visited,N,M); 
+                } else{
+                    visited[i][j]=true;
+                }
+            }
+        }
+        return nislands;
+        
+        
+    }
+    
+    int DFS(Pair p, ArrayList<ArrayList<Integer>> list, boolean[][] visited,int N,int M){
+        int r=p.row;
+        int c=p.col;
+        visited[r][c] = true;
+        ArrayList<Integer> temp = list.get(r);
+        int e = temp.get(c);
+        int rc=0;
+        if(e == 1){
+            for(int i=-1; i<=1;i++){
+                    for (int j=-1;j<=1;j++){
+                        int k=r+i ;
+                        int l=c+j;
+                        if(k>=0 && l>=0 && k<N && l<M)
+                            if(!visited[k][l])
+                                rc=DFS(new Pair(k,l),list,visited,N,M);
+                    }
+                
+            }
+            
+        }
+        return e;
+    }
+    
+}
