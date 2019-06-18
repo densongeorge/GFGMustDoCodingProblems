@@ -1,0 +1,39 @@
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws Exception
+	 {
+	 //code
+	 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 
+	 int tc = Integer.parseInt(br.readLine());
+	 
+	 while(tc-- > 0) {
+	     int [] map = new int[26];
+	     
+	     String ip = br.readLine().trim();
+	     
+	     for(int i=0; i<ip.length();i++) {
+	         ++map[ip.charAt(i)-'a'];
+	         
+	     }
+	     int max = 0;
+	      for(int i=0; i<26;i++) {
+	       max=Math.max(max,map[i]);   
+	     
+	 }
+	 //even
+	 boolean flag = true;
+	 if(ip.length()%2 == 0) {
+	     if(max>(ip.length()/2)) flag = false;
+	 }
+	 else{ //odd length
+	     if(max>((ip.length()/2)+1)) flag = false;
+	 }
+	 if(flag)
+	 System.out.println(1);
+	 else System.out.println(0); 
+	 }
+}
+}
