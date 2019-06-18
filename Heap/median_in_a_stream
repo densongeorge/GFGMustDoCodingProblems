@@ -1,0 +1,52 @@
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 int s = Integer.parseInt(br.readLine());
+	 //int [] input = new int [n];
+	 PriorityQueue<Integer> max = new PriorityQueue<Integer>(Collections.reverseOrder());
+	 PriorityQueue<Integer> min = new PriorityQueue<Integer>();
+	 int maxs = 0;
+	 int mins = 0;
+	 int i = 1;
+	 int median = 0;
+	 int ip = 0;
+	 while(s-- > 0){
+	     ip = Integer.parseInt(br.readLine().trim());
+	     if(i == 1) {
+	         
+	         min.add(ip);
+	         mins++;
+	         
+	     } else {
+	         if(ip <= median){
+	            max.add(ip); 
+	            maxs++;
+	         } else {
+	             min.add(ip);
+	             mins++;
+	         }
+	     }
+	     if((mins - maxs) > 1){
+	         max.add(min.poll());
+	         maxs ++;
+	         mins --;
+	     }
+	     if((maxs - mins) > 1){
+	         min.add(max.poll());
+	         maxs--;
+	         mins++;
+	     }
+            if(mins > maxs) median = min.peek();
+	         else if(mins < maxs) median = max.peek();
+	         else median = (max.peek() + min.peek())/2;
+	     
+	     System.out.println(median);
+	     i++;
+	 }
+	 }
+}
