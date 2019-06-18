@@ -1,0 +1,25 @@
+// In java function tour() takes two arguments array of petrol
+// and array of distance
+class GfG
+{
+    int tour(int petrol[], int distance[])
+    {
+	// Your code here
+	int count = -1;
+	int sum = 0;
+	for(int i=0; i<petrol.length ; i++){
+	    sum = sum + (petrol[i]-distance[i]);
+	}
+	if(sum < 0) return -1;
+	int spare = 0;
+	int pump = 0;
+	for(int i=0; i<petrol.length ; i++){
+	   spare = spare + petrol[i]-distance[i];
+	   if(spare < 0) {
+	       spare = 0;
+	       pump = i+1;
+	   }
+	}
+	return pump;
+    }
+}
