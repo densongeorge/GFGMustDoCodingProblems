@@ -1,0 +1,48 @@
+/*node class of the linked list
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+}*/
+// complete the below function
+class GfG
+{
+    public static void pairwiseSwap(Node node)
+    {
+        
+       // add your code here
+       if(node == null)
+        return ;
+        if(node.next == null)
+        return;
+       Node p = node;
+       Node q = node;
+         int t = 0;
+       if(node.next == null){
+        t = node.data;
+        p.data = node.data;
+        node.data = t; 
+       }
+     
+       
+       while(q != null && q.next !=null && p.next != null){
+           p = q.next;
+           t = p.data;
+           p.data = q.data;
+           q.data = t;
+           q = p.next;
+           
+          
+       }
+       
+       
+       
+    }
+    
+   
+}
