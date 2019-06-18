@@ -1,0 +1,37 @@
+// A Binary Tree node
+/* class Node
+{
+    int data;
+    Node left, right, nextRight;
+    Node(int item)
+    {
+        data = item;
+        left = right = nextRight = null;
+		
+    }
+} */
+class GfG
+{
+    // Function to connect nodes at same level
+    void connect(Node root)
+    {
+        // Your code here	
+       Queue<Node> q = new LinkedList<Node>();
+       q.add(root);
+       while(!q.isEmpty()) {
+           int size = q.size();
+           while(size-- > 0){
+                   Node curr = q.remove();
+                   Node next = null;
+                   if(size != 0)
+                    next = q.peek();
+                    if(curr != null)
+                        curr.nextRight = next;
+                   if(curr != null) {
+                       q.add(curr.left);
+                       q.add(curr.right);
+                    }  
+           }   
+    }
+}
+}
