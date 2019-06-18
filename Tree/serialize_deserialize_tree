@@ -1,0 +1,63 @@
+/*Complete the given function
+Node is as follows:
+class Tree{
+	int data;
+	Tree left,right;
+	Tree(int d){
+		data=d;
+		left=right=null;
+	}
+}*/
+class GfG{
+    StringBuilder res;
+	public String serialize(Tree root,ArrayList<Integer> aa) {
+//add Code here.
+Queue<Tree> q = new LinkedList<Tree>();
+StringBuilder res = new StringBuilder();
+q.add(root);
+while(!q.isEmpty()){
+    int size = q.size();
+    while (size-- > 0){
+        Tree n = q.remove();
+        if(n==null) res.append(-1+" ");
+        else {
+            res.append(n.data+" ");
+            q.add(n.left);
+            q.add(n.right);
+        }
+    }
+}
+return res.toString();
+}
+
+public Tree deSerialize(String data) {
+//add code here.
+String[] tree = data.split(" ");
+Queue<Tree> q = new LinkedList<Tree>();
+Tree root = new Tree(Integer.parseInt(tree[0]));
+q.add(root);
+Tree p = root;
+int i = 0;
+    while(!q.isEmpty()) {
+      p = q.remove();  
+    if((2*i+1)<data.length()) {
+    int lc = Integer.parseInt(tree[2*i+1]);
+    if(lc != -1) {
+        p.left = new Tree(lc);
+        q.add(p.left);
+    }
+    }
+    
+    if((2*i+2)<data.length()) {
+    int rc = Integer.parseInt(tree[2*i+2]);
+    if(rc != -1) {
+        p.right = new Tree(rc);
+        q.add(p.right);
+    }
+    
+}
+i++;
+}
+return root;
+}
+}
